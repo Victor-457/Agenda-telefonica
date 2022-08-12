@@ -35,6 +35,8 @@ export class FormularioComponent {
   constructor(private _formBuilder: FormBuilder,
               private _changeDetector: ChangeDetectorRef){
 
+    this.listaContatos.data = listaContatosTeste
+    
     this.contatoForm = this._formBuilder.group({
       nome: new FormControl('',[
         Validators.required,
