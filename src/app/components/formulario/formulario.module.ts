@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from 'src/shared/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MaterialModule } from 'src/shared/material/material.module';
       }
     ]),
     NgxMaskModule.forRoot(),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class FormularioModule { }
