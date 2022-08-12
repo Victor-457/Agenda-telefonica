@@ -1,18 +1,40 @@
-import { UserData } from './../../models/contato';
+import { Contato } from 'src/app/models/contato';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+
+const listaContatosTeste=[
+  {
+    codigo: "1",
+    nome: "teste 1",
+    telefone: "21989852917"
+  },
+  {
+    codigo: "2",
+    nome: "teste 2",
+    telefone: "21989852912"
+  },
+  {
+    codigo: "3",
+    nome: "teste 3",
+    telefone: "21989852913"
+  }]
+
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css']
 })
-export class FormularioComponent implements OnInit {
-  dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>();
+export class FormularioComponent {
+
+  listaContatos: MatTableDataSource<Contato> = new MatTableDataSource<Contato>();
   public contatoForm!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder){
+  constructor(private _formBuilder: FormBuilder,
+              private _changeDetector: ChangeDetectorRef){
+
     this.contatoForm = this._formBuilder.group({
       nome: new FormControl('',[
         Validators.required,
@@ -22,13 +44,31 @@ export class FormularioComponent implements OnInit {
         Validators.required,
       Validators.pattern(/^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$/)]),
     });
+
   }
 
-  ngOnInit(): void {
+  camposValidos(): boolean{
+    let camposValidos = (this.contatoForm.get('nome')?.invalid && this.contatoForm.get('nome')?.touched) &&
+      (this.contatoForm.get('telefone')?.invalid && this.contatoForm.get('telefone')?.touched)
+
+    return camposValidos != undefined ? !camposValidos : false
   }
+
   addData() {
-    // const randomElementIndex = Math.floor(Math.random() * this.dataSource.data.length);
-    // this.dataSource.data.push();
-    console.log("aaaaaaaaaaa")
+
+    if(this.camposValidos()){
+      let contatoCodigo = (this.listaContatos.data.length + 1).toString()
+      let contato = { codigo: contatoCodigo,
+                      nome: this.contatoForm.value.nome,
+                      telefone: this.contatoForm.value.telefone
+                    }
+
+      this.listaContatos.data.push(contato)
+      this.listaContatos.data = (this.listaContatos.data != undefined) ?
+      Object.assign(this.listaContatos.data) :
+      Object.assign([]);
+    }
+
   }
+
 }

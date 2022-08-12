@@ -13,7 +13,7 @@
       </mat-form-field>
 
         <button type="button" mat-raised-button color="primary" (click)="addData()">Salvar</button>
-        <button type="button" class="mg-l" mat-stroked-button color="primary">Limpar</button>
+        <button type="button" class="mg-l" mat-stroked-button color="primary" (click)="contatoForm.reset()">Limpar</button>
 
     </form>
 
@@ -23,6 +23,6 @@
 <br>
 <mat-card>
   <mat-card-content>
-<app-tabela-contatos [dataSource]="dataSource"></app-tabela-contatos>
+<app-tabela-contatos [listaContatos]="listaContatos"></app-tabela-contatos>
 </mat-card-content>
 </mat-card>
