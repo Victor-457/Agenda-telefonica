@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { UserData } from 'src/app/models/contato';
+import { Contato } from 'src/app/models/contato';
 
 
 
@@ -14,40 +15,55 @@ import { UserData } from 'src/app/models/contato';
   styleUrls: ['./tabela-contatos.component.css']
 })
 
-export class TabelaContatosComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  @Input() dataSource: MatTableDataSource<UserData>;
+export class TabelaContatosComponent implements AfterViewInit, OnChanges {
+  displayedColumns: string[] = ['codigo', 'nome', 'telefone', 'remover'];
+  @Input() listaContatos: MatTableDataSource<Contato> = new MatTableDataSource<Contato>();
 
 
   @ViewChild(MatSort) sort: MatSort= new MatSort();
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => new UserData().createNewUser(k + 1));
+  constructor(private _changeDetector: ChangeDetectorRef,
+    private _liveAnnouncer: LiveAnnouncer) {
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.listaContatos.data = (this.listaContatos.data != undefined) ?
+    Object.assign(this.listaContatos.data) :
+    Object.assign([]);
   }
 
   ngAfterViewInit() {
-
-    this.dataSource.sort = this.sort;
+    this.listaContatos.sort = this.sort;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.listaContatos.filter = filterValue.trim().toLowerCase();
   }
 
 
-removeData() {
-  this.dataSource.data.pop();
+  removeData(codigo: any) {
+    this.listaContatos.data.forEach((element: any,index)=>{
+      if(element.codigo == codigo)
+      this.listaContatos.data.splice(index,1);
+   });
 
-}
+    this.listaContatos.data = (this.listaContatos.data != undefined) ?
+                              Object.assign(this.listaContatos.data) :
+                              Object.assign([]);
 
+  }
+  announceSortChange(sortState: Sort) {
+
+    if (sortState.direction == 'asc') {
+      this.listaContatos.data.sort()
+      this.listaContatos.data = (this.listaContatos.data != undefined) ?
+                              Object.assign(this.listaContatos.data) :
+                              Object.assign([]);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 
 }
