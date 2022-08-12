@@ -1,0 +1,26 @@
+.example-form {
+  min-width: 150px;
+
+  width: 100%;
+}
+
+.example-full-width {
+  width: 47.5%;
+}
+
+.mg-l{
+  margin-left: 2em;
+}
+mat-card{
+  top: 10%;
+  margin-left: 10%;
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+
+.example-full-width{
+    margin: 0 !important;
+    width: 100%;
+  }
+}
