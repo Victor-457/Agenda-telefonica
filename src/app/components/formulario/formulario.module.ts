@@ -1,11 +1,12 @@
-import { TabelaContatosComponent } from './../tabela-contatos/tabela-contatos.component';
-import { RouterModule } from '@angular/router';
-import { FormularioComponent } from './formulario.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from 'src/shared/material/material.module';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { NgxMaskModule } from 'ngx-mask';
+import { FormularioComponent } from './formulario.component';
+import { TabelaContatosComponent } from './../tabela-contatos/tabela-contatos.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       }
     ]),
     NgxMaskModule.forRoot(),
-    MaterialModule,
     ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class FormularioModule { }

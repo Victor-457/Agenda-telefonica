@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge'
@@ -8,7 +7,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
 import { MatIconModule } from '@angular/material/icon'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
-import { MatDividerModule } from '@angular/material/divider' 
+import { MatDividerModule } from '@angular/material/divider'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
 import { MatChipsModule } from '@angular/material/chips'
@@ -78,7 +77,6 @@ import { MatTreeModule } from '@angular/material/tree'
     MatTooltipModule,
     MatTreeModule,
     FlexLayoutModule
-
   ],
   declarations: []
 })
