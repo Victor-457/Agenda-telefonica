@@ -1,16 +1,16 @@
-.example-form {
+.formulario {
   min-width: 150px;
-
   width: 100%;
 }
 
-.example-full-width {
+.camposFormulario {
   width: 47.5%;
 }
 
 .mg-l{
   margin-left: 2em;
 }
+
 mat-card{
   top: 10%;
   margin-left: 10%;
@@ -19,7 +19,7 @@ mat-card{
 
 @media (max-width: 768px) {
 
-.example-full-width{
+  .camposFormulario{
     margin: 0 !important;
     width: 100%;
   }

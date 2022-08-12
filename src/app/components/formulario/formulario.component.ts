@@ -1,27 +1,27 @@
-import { Contato } from 'src/app/models/contato';
-import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 
+import { Contato } from 'src/app/models/contato';
 
-const listaContatosTeste=[
+const listaContatosInicial = [
   {
     codigo: "1",
-    nome: "teste 1",
-    telefone: "21989852917"
+    nome: "Victor",
+    telefone: "21973068947"
   },
   {
     codigo: "2",
-    nome: "teste 2",
-    telefone: "21989852912"
+    nome: "Antônio",
+    telefone: "21973068948"
   },
   {
     codigo: "3",
-    nome: "teste 3",
-    telefone: "21989852913"
+    nome: "Maria",
+    telefone: "21973068949"
   }]
-
 
 @Component({
   selector: 'app-formulario',
@@ -36,7 +36,7 @@ export class FormularioComponent {
   constructor(private _formBuilder: FormBuilder,
               private _toastr: ToastrService){
 
-    this.listaContatos.data = listaContatosTeste
+    this.listaContatos.data = listaContatosInicial
 
     this.contatoForm = this._formBuilder.group({
       nome: new FormControl('',[
@@ -47,18 +47,13 @@ export class FormularioComponent {
         Validators.required,
       Validators.pattern(/^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$/)]),
     });
-
   }
 
   camposValidos(): boolean{
-    let camposValidos = (this.contatoForm.get('nome')?.invalid && this.contatoForm.get('nome')?.touched) &&
-      (this.contatoForm.get('telefone')?.invalid && this.contatoForm.get('telefone')?.touched)
-
     return this.contatoForm.status == "VALID" ? true : false
   }
 
-  addData() {
-
+  salvarContato(): void{
     if(this.camposValidos()){
       let contatoCodigo = (this.listaContatos.data.length + 1).toString()
       let contato = { codigo: contatoCodigo,
@@ -70,6 +65,8 @@ export class FormularioComponent {
       this.listaContatos.data = (this.listaContatos.data != undefined) ?
       Object.assign(this.listaContatos.data) :
       Object.assign([]);
+
+      this.contatoForm.reset();
     }
     else
       this._toastr.error("Verifique o preenchimento dos campos e tente novamente!","Campos inválidos")

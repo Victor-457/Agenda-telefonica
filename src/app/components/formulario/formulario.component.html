@@ -1,28 +1,30 @@
 
 <mat-card>
   <mat-card-content>
-    <form class="example-form" [formGroup]="contatoForm">
-      <mat-form-field class="example-full-width" appearance="fill">
+    <form class="formulario" [formGroup]="contatoForm">
+
+      <mat-form-field class="camposFormulario" appearance="fill">
         <mat-label>Nome</mat-label>
         <input type="text" matInput formControlName="nome">
       </mat-form-field>
 
-      <mat-form-field class="mg-l example-full-width" appearance="fill">
+      <mat-form-field class="mg-l camposFormulario" appearance="fill">
         <mat-label>Telefone</mat-label>
         <input type="text" matInput formControlName="telefone" mask="(00)00000-0000">
       </mat-form-field>
 
-        <button type="button" mat-raised-button color="primary" (click)="addData()">Salvar</button>
-        <button type="button" class="mg-l" mat-stroked-button color="primary" (click)="contatoForm.reset()">Limpar</button>
-
+      <button type="button" mat-raised-button color="primary" (click)="salvarContato()">Salvar</button>
+      <button type="button" class="mg-l" mat-stroked-button color="primary" (click)="contatoForm.reset()">Limpar</button>
     </form>
 
   </mat-card-content>
 </mat-card>
+
 <br>
 <br>
+
 <mat-card>
   <mat-card-content>
-<app-tabela-contatos [listaContatos]="listaContatos"></app-tabela-contatos>
-</mat-card-content>
+    <app-tabela-contatos [listaContatos]="listaContatos"></app-tabela-contatos>
+  </mat-card-content>
 </mat-card>
