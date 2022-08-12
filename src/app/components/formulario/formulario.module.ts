@@ -22,7 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ]),
     NgxMaskModule.forRoot(),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class FormularioModule { }

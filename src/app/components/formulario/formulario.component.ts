@@ -2,6 +2,7 @@ import { Contato } from 'src/app/models/contato';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 const listaContatosTeste=[
@@ -33,10 +34,10 @@ export class FormularioComponent {
   public contatoForm!: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
-              private _changeDetector: ChangeDetectorRef){
+              private _toastr: ToastrService){
 
     this.listaContatos.data = listaContatosTeste
-    
+
     this.contatoForm = this._formBuilder.group({
       nome: new FormControl('',[
         Validators.required,
@@ -53,7 +54,7 @@ export class FormularioComponent {
     let camposValidos = (this.contatoForm.get('nome')?.invalid && this.contatoForm.get('nome')?.touched) &&
       (this.contatoForm.get('telefone')?.invalid && this.contatoForm.get('telefone')?.touched)
 
-    return camposValidos != undefined ? !camposValidos : false
+    return this.contatoForm.status == "VALID" ? true : false
   }
 
   addData() {
@@ -70,7 +71,8 @@ export class FormularioComponent {
       Object.assign(this.listaContatos.data) :
       Object.assign([]);
     }
-
+    else
+      this._toastr.error("Verifique o preenchimento dos campos e tente novamente!","Campos inválidos")
   }
 
 }
