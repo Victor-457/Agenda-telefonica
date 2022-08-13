@@ -1,27 +1,39 @@
-# ProvaFrontFiscon
+# Agenda Telefônica
+![Página inicial](https://raw.githubusercontent.com/Victor-457/Agenda-telefonica/master/src/assets/prints-readme/PaginaInicial.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+![Adição Contato](https://raw.githubusercontent.com/Victor-457/Agenda-telefonica/master/src/assets/prints-readme/EntradaDados.png)
 
-## Development server
+![Página não encontrada](https://raw.githubusercontent.com/Victor-457/Agenda-telefonica/master/src/assets/prints-readme/Pagina404.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Notificação de telefone inválido](https://raw.githubusercontent.com/Victor-457/Agenda-telefonica/master/src/assets/prints-readme/TelefoneInvalido.png)
 
-## Code scaffolding
+## Requisitos
+1 - Crie uma página funcional com AngularCli e Material que realize 2 operações distintas, na mesma página.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2 - Utilize os componentes, recursos e imagens que desejar.
 
-## Build
+3 - Na primeira página colocar:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    3.1- 1 Label Nome
+    3.2- 1 Imput (campo para digitar o Nome)
+    3.3- 1 Label Telefone
+    3.4- 1 Imput (campo para digitar o Telefone)
+    3.5- 1 Botão Limpar
+    3.6- 1 Botão Salvar
+    3.7- Ao clicar no botão, validar se os campos estão preenchidos e ao efetivar preencher o componente MatTable(https://material.angular.io/components/table/overview) com um campo de autoincremento(código) e os valores informados.
 
-## Running unit tests
+OBS: no MatTable habilitar recursos do próprio componente:
+    
+    - Busca
+    - Ordenação
+    - Exclusão
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Execução
+Observação: é necessário possuir node instalado.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Após realizar o download e extrair o projeto, é necessário abrir o promt de comando ou powershell(Windows), ou o terminal(Linux) e executar o comando `npm install`.
 
-## Further help
+Após executado basta executar o comando `ng serve`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Então a aplicação será executada no seguinte endereço: `http://localhost:4200/`.
