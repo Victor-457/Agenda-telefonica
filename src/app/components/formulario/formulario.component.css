@@ -23,4 +23,16 @@ mat-card{
     margin: 0 !important;
     width: 100%;
   }
+
+
+}
+
+@media (max-width: 560px) {
+
+  mat-card{
+    top: 10%;
+    width: 100%;
+    margin-left: 0;
+  }
+
 }
