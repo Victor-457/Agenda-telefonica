@@ -1,42 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 
-import { Contato } from 'src/app/models/contato';
-
-const listaContatosInicial = [
-  {
-    codigo: "1",
-    nome: "Victor",
-    telefone: "21973068947"
-  },
-  {
-    codigo: "2",
-    nome: "Antônio",
-    telefone: "21973068948"
-  },
-  {
-    codigo: "3",
-    nome: "Maria",
-    telefone: "21973068949"
-  }]
+import { Contato } from 'src/app/shared/models/contato';
+import { ListaContatoService } from 'src/app/shared/services/lista-contato.service';
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css']
 })
-export class FormularioComponent {
+export class FormularioComponent implements OnInit {
 
   listaContatos: MatTableDataSource<Contato> = new MatTableDataSource<Contato>();
   public contatoForm!: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
+              private _listaContatoService: ListaContatoService,
               private _toastr: ToastrService){
 
-    this.listaContatos.data = listaContatosInicial
 
     this.contatoForm = this._formBuilder.group({
       nome: new FormControl('',[
@@ -49,14 +33,21 @@ export class FormularioComponent {
     });
   }
 
+  async ngOnInit() {
+
+    this.listaContatos.data = await (this._listaContatoService.recuperarListaContatos())
+
+
+  }
+
   camposValidos(): boolean{
     return this.contatoForm.status == "VALID" ? true : false
   }
 
-  salvarContato(): void{
+  async salvarContato(){
     if(this.camposValidos()){
       let contatoCodigo = (this.listaContatos.data.length + 1).toString()
-      let contato = { codigo: contatoCodigo,
+      let contato = { id: contatoCodigo,
                       nome: this.contatoForm.value.nome,
                       telefone: this.contatoForm.value.telefone
                     }
@@ -65,7 +56,7 @@ export class FormularioComponent {
       this.listaContatos.data = (this.listaContatos.data != undefined) ?
       Object.assign(this.listaContatos.data) :
       Object.assign([]);
-
+      await (this._listaContatoService.adicionarContato(contato))
       this.contatoForm.reset();
     }
     else

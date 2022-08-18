@@ -1,9 +1,10 @@
+import { ListaContatoService } from 'src/app/shared/services/lista-contato.service';
 import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
-import { Contato } from 'src/app/models/contato';
+import { Contato } from 'src/app/shared/models/contato';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TabelaContatosComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['codigo', 'nome', 'telefone', 'remover'];
 
-  constructor() {  }
+  constructor(private _listaContatoService: ListaContatoService) {  }
 
   ngAfterViewInit() {
     this.listaContatos.sort = this.sort;
@@ -31,13 +32,15 @@ export class TabelaContatosComponent implements AfterViewInit {
   }
 
   excluirContato(codigo: any) {
-    this.listaContatos.data.forEach((element: any,index)=>{
-      if(element.codigo == codigo)
-      this.listaContatos.data.splice(index,1);
-   });
+  //   this.listaContatos.data.forEach((element: any,index)=>{
+  //     if(element.codigo == codigo)
+  //     this.listaContatos.data.splice(index,1);
+  //  });
+debugger
+   this._listaContatoService.apagarContato(codigo)
 
-    this.listaContatos.data = (this.listaContatos.data != undefined) ?
-                              Object.assign(this.listaContatos.data) :
-                              Object.assign([]);
+  //   this.listaContatos.data = (this.listaContatos.data != undefined) ?
+  //                             Object.assign(this.listaContatos.data) :
+  //                             Object.assign([]);
   }
 }

@@ -1,0 +1,19 @@
+{
+  "listaContatos": [
+    {
+      "id": "1",
+      "nome": "Victor",
+      "telefone": "21973068947"
+    },
+    {
+      "id": "2",
+      "nome": "Antônio",
+      "telefone": "21973068948"
+    },
+    {
+      "id": "3",
+      "nome": "Maria",
+      "telefone": "21973068949"
+    }
+  ]
+}
